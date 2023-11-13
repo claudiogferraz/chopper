@@ -1,6 +1,7 @@
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, GatewayIntentBits, Guild } from "discord.js";
 
 import pontos from "./commands/pontos";
+import finalizar from "./commands/finalizar";
 
 const client = new Client({
 	intents: [
@@ -33,6 +34,9 @@ client.on("interactionCreate", async (interaction) => {
 			await interaction.channel?.send(
 				await pontos(interaction.guild, "week-before")
 			);
+		case "finalizar":
+			await interaction.reply("Enviando mensagens de semana finalizada.");
+			await finalizar(interaction.guild);
 		default:
 			break;
 	}
