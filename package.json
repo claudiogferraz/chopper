@@ -4,8 +4,7 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
-    "start": "npx ts-node ./src/main.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "bun run ./src/main.ts"
   },
   "author": "Claudio Gofe gofeclaudio@gmail.com",
   "license": "UNLICENSED",
