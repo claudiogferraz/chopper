@@ -8,7 +8,7 @@ O bot **Chopper** é uma ferramenta para agilizar aquelas tarefas chatas e repet
 
 ## Download
 Para baixar o repositório execute o seguinte comando no terminal:
-```bash
+```sh
 git clone git@github.com/claudiogofe/chopper
 ```
 
@@ -21,7 +21,7 @@ Antes de iniciar o bot, você precisa se certificar que as seguintes variáveis 
 - **LEADER_ROLE_ID:** O ID do cargo de liderança no servidor da área.
 
 Exemplo de **.env** com valores indefinidos:
-```shell
+```sh
 CLIENT_SECRET=
 APPLICATION_ID=
 LEADER_ROLE_ID=
@@ -32,7 +32,7 @@ Apenas oferecemos suporte à engine do **[Bun](https://bun.sh/)** para executar 
 
 Após baixar o repositório, para iniciar o bot é necessário baixar também os pacotes necessários e rodar comando de inicialização, como no exemplo:
 
-```bash
+```sh
 bun install # Instala dependências do package.json
 bun run start # Inicia a execução do bot
 ```
