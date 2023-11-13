@@ -24,6 +24,11 @@ client.on("ready", () => {
 client.on("interactionCreate", async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 
+	const userRoles = interaction.member?.roles as string[];
+	if (!userRoles.includes(process.env.LEADER_ROLE_ID!)) {
+		await interaction.reply("Apenas a liderança pode utilizar o bot.");
+	}
+
 	switch (interaction.commandName) {
 		case "pontos":
 			await interaction.reply("Contando pontos, aguarde...");
