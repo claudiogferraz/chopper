@@ -2,6 +2,7 @@ import { Client, GatewayIntentBits, Guild } from "discord.js";
 
 import pontos from "./commands/pontos";
 import finalizar from "./commands/finalizar";
+import isLeader from "./utils/isLeader";
 
 const client = new Client({
 	intents: [
@@ -24,10 +25,8 @@ client.on("ready", () => {
 client.on("interactionCreate", async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 
-	const userRoles = interaction.member?.roles as string[];
-	if (!userRoles.includes(process.env.LEADER_ROLE_ID!)) {
-		await interaction.reply("Apenas a liderança pode utilizar o bot.");
-	}
+	let leader = await isLeader(interaction);
+	if (!leader) return;
 
 	switch (interaction.commandName) {
 		case "pontos":
