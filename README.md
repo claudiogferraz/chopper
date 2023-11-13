@@ -1,18 +1,18 @@
-# Chopper - bot p/ staff de design
+# Chopper
 
 O bot **Chopper** é uma ferramenta para agilizar aquelas tarefas chatas e repetitivas no gerenciamento do seu servidor da staff de design.
 
-## Dependências
+### Dependências
 - Git
 - Bun
 
-## Download
+### Download
 Para baixar o repositório execute o seguinte comando no terminal:
 ```bash
 git clone git@github.com/claudiogofe/chopper
 ```
 
-## Ambient Variables
+### Env Variables
 
 Antes de iniciar o bot, você precisa se certificar que as seguintes variáveis de ambiente estão configuradas corretamente:
 
@@ -27,7 +27,7 @@ APPLICATION_ID=
 LEADER_ROLE_ID=
 ```
 
-## Inicialização
+### Inicialização
 Apenas oferecemos suporte à engine do **[Bun](https://bun.sh/)** para executar o bot.
 
 Após baixar o repositório, para iniciar o bot é necessário baixar também os pacotes necessários e rodar comando de inicialização, como no exemplo:
@@ -37,7 +37,7 @@ bun install # Instala dependências do package.json
 bun run start # Inicia a execução do bot
 ```
 
-## Comandos
+### Comandos
 
 - **/pontos** - Retorna a pontuação de todas as artes enviadas nos portfolios durante a semana, desde o último sábado ao meio-dia.
 - **/anterior** - Retorna a pontuação de todas as artes enviadas nos portfolios durante a semana anterior, desde sábado ao meio-dia.
