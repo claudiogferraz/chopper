@@ -8,7 +8,6 @@ const isLeader = async (
 	);
 	const userRoles = interactionUser?.roles.cache;
 
-	console.log(userRoles);
 	if (userRoles != undefined && userRoles.has(process.env.LEADER_ROLE_ID!)) {
 		return true;
 	} else {
