@@ -46,14 +46,17 @@ const pontos = async (
 						const currentMessage = messages.at(i);
 
 						if (
-							Math.floor(currentMessage!.createdAt.getTime() / 1000) <
-							Math.floor(comparisonTime / 1000)
+							(arg != "week-before" &&
+								currentMessage!.createdAt.getTime() / 1000 <
+									lastSaturday / 1000) ||
+							(arg == "week-before" &&
+								currentMessage!.createdAt.getTime() / 1000 <
+									comparisonTime / 1000)
 						) {
 							i = messages.size;
 						} else if (
 							arg == "week-before" &&
-							Math.floor(currentMessage!.createdAt.getTime() / 1000) >
-								Math.floor(lastSaturday / 1000)
+							currentMessage!.createdAt.getTime() / 1000 > lastSaturday / 1000
 						) {
 						} else {
 							const attachmentsSize = currentMessage!.attachments.size;

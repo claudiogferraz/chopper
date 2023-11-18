@@ -38,9 +38,11 @@ client.on("interactionCreate", async (interaction) => {
 			await interaction.channel?.send(
 				await pontos(interaction.guild, "week-before")
 			);
+			break;
 		case "finalizar":
 			await interaction.reply("Enviando mensagens de semana finalizada.");
 			await finalizar(interaction.guild);
+			break;
 		default:
 			break;
 	}
