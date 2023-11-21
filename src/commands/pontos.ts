@@ -1,7 +1,7 @@
 import { ChannelType, Guild, NonThreadGuildBasedChannel } from "discord.js";
 import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
-import { getLastSaturday, getToday } from "../utils/days";
+import { getLastSaturday } from "../utils/days";
 
 interface RankingEntry {
 	name: string;
