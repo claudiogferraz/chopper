@@ -1,7 +1,7 @@
 import { ChannelType, Guild, NonThreadGuildBasedChannel } from "discord.js";
 import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
-import { getLastSaturday, getPreviousSaturday } from "../utils/days";
+import { getLastSaturday, getToday } from "../utils/days";
 
 interface RankingEntry {
 	name: string;
@@ -22,16 +22,7 @@ const pontos = async (
 		const channels = await guild.channels.fetch();
 		const ranking: Array<RankingEntry> = [];
 
-		let comparisonTime: number;
-
-		let previousSaturday = getPreviousSaturday().hour(12).toDate().getTime();
 		let lastSaturday = getLastSaturday().hour(12).toDate().getTime();
-
-		if (arg === "week-before") {
-			comparisonTime = previousSaturday;
-		} else {
-			comparisonTime = lastSaturday;
-		}
 
 		const updateRanking = async (channel: NonThreadGuildBasedChannel) => {
 			if (channel?.parent?.name.toLocaleLowerCase().includes("portfolio")) {
@@ -46,19 +37,15 @@ const pontos = async (
 						const currentMessage = messages.at(i);
 
 						if (
-							(arg != "week-before" &&
-								currentMessage!.createdAt.getTime() / 1000 <
-									lastSaturday / 1000) ||
-							(arg == "week-before" &&
-								currentMessage!.createdAt.getTime() / 1000 <
-									comparisonTime / 1000)
+							Math.floor(currentMessage!.createdAt.getTime() / 1000) <
+							Math.floor(lastSaturday / 1000)
 						) {
 							i = messages.size;
 						} else if (
-							arg == "week-before" &&
-							currentMessage!.createdAt.getTime() / 1000 > lastSaturday / 1000
+							Math.floor(currentMessage!.createdAt.getTime() / 1000) >
+								Math.floor(lastSaturday / 1000) &&
+							currentMessage!.member!.id != "1160914279625662585"
 						) {
-						} else {
 							const attachmentsSize = currentMessage!.attachments.size;
 							let hasImages = false;
 
