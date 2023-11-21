@@ -14,9 +14,7 @@ const finalizar = async (guild: Guild | null) => {
 		for (let i = 0; i < portfolioChannels.size; i++) {
 			const channel = portfolioChannels.at(i);
 			if (channel!.type == ChannelType.GuildText) {
-				channel?.send(
-					"## <:choque:1171634767129751574> Semana Finalizada <:choque:1171634767129751574>"
-				);
+				channel?.send("https://imgur.com/jAxZ7ot.png");
 			}
 		}
 	} catch (error) {
