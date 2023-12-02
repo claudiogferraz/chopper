@@ -22,7 +22,7 @@ const pontos = async (
 		const channels = await guild.channels.fetch();
 		const ranking: Array<RankingEntry> = [];
 
-		let lastSaturday = getLastSaturday().hour(12).toDate().getTime();
+		let lastSaturday = getLastSaturday().hour(21).toDate().getTime();
 
 		const updateRanking = async (channel: NonThreadGuildBasedChannel) => {
 			if (channel?.parent?.name.toLocaleLowerCase().includes("portfolio")) {
