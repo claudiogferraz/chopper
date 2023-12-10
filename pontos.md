@@ -1,0 +1,33 @@
+# :cdwdsg_raio: Pontos da Semana :cdwdsg_raio:
+_ _
+
+**Dlowx** 1180
+**Kauazinho** 480
+**Z3** 310
+**Satan** 300
+**Akumu** 290
+**Haru** 210
+**Bnz** 200
+**Gourpoo** 170
+**Fbzin** 170
+**Ketty** 150
+**Hari** 140
+**KlausKaos** 140
+**Cley** 130
+**Nic** 50
+**Niix** 40
+**Gabriel** 30
+**Sa** 30
+**F4** 10
+**Kauan** 10
+**Meralda** 0
+**Famous** 0
+**Ju** 0
+**Liam** 0
+**Mira** 0
+**Mathew** 0
+**Alê** 0
+**Mura** 0
+**Crazy** 0
+**Carol** 0
+**Nandinha** 0

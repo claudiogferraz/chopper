@@ -1,31 +1,30 @@
-# ⚡ Tabela de Horas ⚡
+## :cdwdsg_horas: Tabela de Horas :cdwdsg_horas:
 _ _
-✅ Fizeram as horas:
+**:cdwds_gcheck: Fizeram as horas:**
 
-**Akumu** 35h 06m
-**KlausKaos** 33h 01m
-**Ketty** 29h 19m
-**Satan** 28h 05m
-**Niix** 26h 18m
-**Nandinha** 25h 38m
-**Mathew** 22h 53m
-**F4** 22h 47m
-**Haru** 22h 42m
-**Nic** 21h 16m
-**Kauan** 19h 59m
-**Kauazinho** 17h 07m
-**Carol** 16h 04m
-**Dlowx** 12h 30m
-**Bnz** 12h 25m
+**Sa** 46h 38m
+**Famous** 34h 09m
+**Haru** 33h 01m
+**KlausKaos** 28h 04m
+**Z3** 25h 17m
+**Gabriel** 24h 45m
+**Ketty** 22h 43m
+**Kauazinho** 20h 53m
+**Niix** 20h 37m
+**Hari** 18h 06m
+**Nic** 17h 12m
+**Nandinha** 16h 34m
+**Akumu** 14h 58m
+**F4** 14h 19m
+**Satan** 12h 12m
+**Bnz** 12h 06m
 
-❌ Não fizeram as horas:
+**:cdwds_gxis: Não fizeram as horas:**
 
-**Z3** 10h 07m
-**Mura** 08h 24m
-**Hari** 04h 23m
-**Liam** 03h 52m
-**Gourpoo** 02h 11m
-**Cley** 01h 38m
-**Alê** 01h 24m
-**Fbzin** 00h 00m
-**Mira** 00h 00m
+**Liam** 08h 44m
+**Dlowx** 07h 40m
+**Gourpoo** 04h 39m
+**Fbzin** 03h 48m
+**Cley** 0h 00m
+**Kauan** 00h 00m
+**Meralda** 00h 00m
