@@ -109,7 +109,7 @@ const pontos = async (
 			await updateRanking(channels.at(i)!);
 		}
 
-		ranking.sort(compareScores);
+		// ranking.sort(compareScores);
 
 		let message = "## ⚡ PONTOS DA SEMANA ⚡\n\n";
 

@@ -2,30 +2,30 @@
 _ _
 ✅ Fizeram as horas:
 
-**Akumu** 35:06
-**KlausKaos** 33:01
-**Ketty** 29:19
-**Satan** 28:05
-**Niix** 26:18
-**Nandinha** 25:38
-**Mathew** 22:53
-**F4** 22:47
-**Haru** 22:42
-**Nic** 21:16
-**Kauan** 19:59
-**Kauazinho** 17:07
-**Carol** 16:04
-**Dlowx** 12:30
-**Bnz** 12:25
+**Akumu** 35h 06m
+**KlausKaos** 33h 01m
+**Ketty** 29h 19m
+**Satan** 28h 05m
+**Niix** 26h 18m
+**Nandinha** 25h 38m
+**Mathew** 22h 53m
+**F4** 22h 47m
+**Haru** 22h 42m
+**Nic** 21h 16m
+**Kauan** 19h 59m
+**Kauazinho** 17h 07m
+**Carol** 16h 04m
+**Dlowx** 12h 30m
+**Bnz** 12h 25m
 
 ❌ Não fizeram as horas:
 
-**Z3** 10:07
-**Mura** 08:24
-**Hari** 04:23
-**Liam** 03:52
-**Gourpoo** 02:11
-**Cley** 01:38
-**Alê** 01:24
-**Fbzin** 00:00
-**Mira** 00:00
+**Z3** 10h 07m
+**Mura** 08h 24m
+**Hari** 04h 23m
+**Liam** 03h 52m
+**Gourpoo** 02h 11m
+**Cley** 01h 38m
+**Alê** 01h 24m
+**Fbzin** 00h 00m
+**Mira** 00h 00m
