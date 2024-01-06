@@ -12,7 +12,7 @@ dayjs.extend(weekday);
 
 const pontos = async (
 	guild: Guild | null,
-	arg: "week-before" | null
+	ordenado: boolean
 ): Promise<string> => {
 	try {
 		if (!guild) {
@@ -109,7 +109,9 @@ const pontos = async (
 			await updateRanking(channels.at(i)!);
 		}
 
-		// ranking.sort(compareScores);
+		if (ordenado) {
+			ranking.sort(compareScores);
+		}
 
 		let message = "## ⚡ PONTOS DA SEMANA ⚡\n\n";
 

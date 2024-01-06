@@ -31,14 +31,18 @@ client.on("interactionCreate", async (interaction) => {
 	switch (interaction.commandName) {
 		case "pontos":
 			await interaction.reply("Contando pontos, aguarde...");
-			await interaction.channel?.send(await pontos(interaction.guild, null));
+			await interaction.channel?.send(await pontos(interaction.guild, false));
 			break;
-		case "anterior":
+		case "ranking":
 			await interaction.reply("Contando pontos, aguarde...");
-			await interaction.channel?.send(
-				await pontos(interaction.guild, "week-before")
-			);
+			await interaction.channel?.send(await pontos(interaction.guild, true));
 			break;
+		// case "anterior":
+		// 	await interaction.reply("Contando pontos, aguarde...");
+		// 	await interaction.channel?.send(
+		// 		await pontos(interaction.guild, "week-before")
+		// 	);
+		// 	break;
 		case "finalizar":
 			await interaction.reply("Enviando mensagens de semana finalizada.");
 			await finalizar(interaction.guild);

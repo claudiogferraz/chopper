@@ -4,6 +4,11 @@ const commands = [
 		description:
 			"Retorna a pontuação de todas as artes enviadas nos portfolios desde o último sábado ao meio-dia.",
 	},
+	{
+		name: "ranking",
+		description:
+			"Retorna a pontuação de todas as artes enviadas nos portfolios desde o último sábado ao meio-dia.",
+	},
 	// {
 	// 	name: "anterior",
 	// 	description:
