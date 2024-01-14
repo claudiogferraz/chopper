@@ -44,7 +44,8 @@ const pontos = async (
 						} else if (
 							Math.floor(currentMessage!.createdAt.getTime() / 1000) >
 								Math.floor(lastSaturday / 1000) &&
-							currentMessage!.member!.id != process.env.APPLICATION_ID
+							currentMessage?.member &&
+							currentMessage.member.id != process.env.APPLICATION_ID
 						) {
 							const attachmentsSize = currentMessage!.attachments.size;
 							let hasImages = false;
