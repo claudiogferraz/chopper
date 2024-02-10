@@ -1,4 +1,10 @@
-import { ChannelType, Guild, NonThreadGuildBasedChannel } from "discord.js";
+import {
+	ChannelType,
+	Collection,
+	Guild,
+	Message,
+	NonThreadGuildBasedChannel,
+} from "discord.js";
 import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import { getLastSaturday } from "../utils/days";
@@ -31,72 +37,89 @@ const pontos = async (
 				let leaderReactions = 0;
 
 				if (channel.type === ChannelType.GuildText) {
-					const messages = await channel.messages.fetch({ limit: 100 });
+					let messages = await channel.messages.fetch({ limit: 100 });
 
-					for (let i = 0; i < messages.size; i++) {
-						const currentMessage = messages.at(i);
+					const addArts = async (
+						messages: Collection<string, Message<true>>
+					) => {
+						for (let i = 0; i < messages.size; i++) {
+							const currentMessage = messages.at(i);
+							let tooMany = true;
 
-						if (
-							Math.floor(currentMessage!.createdAt.getTime() / 1000) <
-							Math.floor(lastSaturday / 1000)
-						) {
-							i = messages.size;
-						} else if (
-							Math.floor(currentMessage!.createdAt.getTime() / 1000) >
-								Math.floor(lastSaturday / 1000) &&
-							currentMessage?.member &&
-							currentMessage.member.id != process.env.APPLICATION_ID
-						) {
-							const attachmentsSize = currentMessage!.attachments.size;
-							let hasImages = false;
+							if (
+								Math.floor(currentMessage!.createdAt.getTime() / 1000) <
+								Math.floor(lastSaturday / 1000)
+							) {
+								i = messages.size;
+								tooMany = false;
+								console.log(channel.name.slice(3) + ": pontos contados.");
+							} else if (
+								Math.floor(currentMessage!.createdAt.getTime() / 1000) >
+									Math.floor(lastSaturday / 1000) &&
+								currentMessage?.member &&
+								currentMessage.member.id != process.env.APPLICATION_ID
+							) {
+								const attachmentsSize = currentMessage!.attachments.size;
+								let hasImages = false;
 
-							if (currentMessage && attachmentsSize > 0) {
-								for (let a = 0; a < attachmentsSize; a++) {
-									const attachmentType = messages
-										.at(i)!
-										.attachments.at(a)?.contentType;
-
-									if (
-										attachmentType == "image/png" ||
-										attachmentType == "image/jpeg" ||
-										attachmentType == "image/jpg" ||
-										attachmentType == "image/gif"
-									) {
-										hasImages = true;
-
-										if (attachmentType == "image/gif") {
-											gifs += 1;
-										} else {
-											arts += 1;
-										}
-									}
-								}
-
-								const countedLeaders: Array<string> = [];
-								const reactions = currentMessage!.reactions.cache;
-								const reactionsSize = reactions.size;
-
-								for (let r = 0; r < reactionsSize; r++) {
-									const users = await reactions.at(r)?.users.fetch();
-									const usersSize = users!.size;
-
-									for (let u = 0; u < usersSize; u++) {
-										const currentUserId = users!.at(u)!.id;
+								if (currentMessage && attachmentsSize > 0) {
+									for (let a = 0; a < attachmentsSize; a++) {
+										const attachmentType = messages
+											.at(i)!
+											.attachments.at(a)?.contentType;
 
 										if (
-											!countedLeaders.includes(currentUserId) &&
-											guild.members.cache
-												.get(currentUserId)
-												?.roles.cache.has(process.env.LEADER_ROLE_ID!)
+											attachmentType == "image/png" ||
+											attachmentType == "image/jpeg" ||
+											attachmentType == "image/jpg" ||
+											attachmentType == "image/webp" ||
+											attachmentType == "image/gif"
 										) {
-											countedLeaders.push(currentUserId);
-											leaderReactions += 1;
+											hasImages = true;
+
+											if (attachmentType == "image/gif") {
+												gifs += 1;
+											} else {
+												arts += 1;
+											}
+										}
+									}
+
+									const countedLeaders: Array<string> = [];
+									const reactions = currentMessage!.reactions.cache;
+									const reactionsSize = reactions.size;
+
+									for (let r = 0; r < reactionsSize; r++) {
+										const users = await reactions.at(r)?.users.fetch();
+										const usersSize = users!.size;
+
+										for (let u = 0; u < usersSize; u++) {
+											const currentUserId = users!.at(u)!.id;
+
+											if (
+												!countedLeaders.includes(currentUserId) &&
+												guild.members.cache
+													.get(currentUserId)
+													?.roles.cache.has(process.env.LEADER_ROLE_ID!)
+											) {
+												countedLeaders.push(currentUserId);
+												leaderReactions += 1;
+											}
 										}
 									}
 								}
 							}
+							if (i == messages.size - 1 && tooMany == true) {
+								i = 0;
+								messages = await channel.messages.fetch({
+									limit: 50,
+									before: currentMessage?.id,
+								});
+							}
 						}
-					}
+					};
+
+					addArts(messages);
 
 					ranking.push({
 						name: channel.name.slice(3),
