@@ -9,15 +9,11 @@
   "author": "Claudio Gofe gofeclaudio@gmail.com",
   "license": "UNLICENSED",
   "dependencies": {
-    "typescript": "^5",
-    "ts-node": "^10",
     "dayjs": "^1.11.10",
     "discord-fetch-messages": "^2.5.0",
     "discord.js": "14.13.0",
-    "dotenv": "^16.3.1"
-  },
-  "devDependencies": {
-  },
-  "peerDependencies": {
+    "dotenv": "^16.3.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
   }
 }

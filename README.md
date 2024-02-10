@@ -3,8 +3,9 @@
 O bot **Chopper** é uma ferramenta para agilizar aquelas tarefas chatas e repetitivas no gerenciamento do seu servidor da staff de design.
 
 ## Dependências
-- Git
-- Bun
+- git
+- node
+- ts-node
 
 ## Download
 Para baixar o repositório execute o seguinte comando no terminal:
@@ -28,13 +29,14 @@ LEADER_ROLE_ID=
 ```
 
 ## Inicialização
-Apenas oferecemos suporte à engine do **[Bun](https://bun.sh/)** para executar o bot.
+Apenas oferecemos suporte à engine do **[Node.js](https://nodejs.org/)** para executar o bot.
 
 Após baixar o repositório, para iniciar o bot é necessário baixar também os pacotes necessários e rodar comando de inicialização, como no exemplo:
 
 ```sh
-bun install # Instala dependências do package.json
-bun run start # Inicia a execução do bot
+npm install -g ts-node # Instala o ts-node para executar typescript
+npm install # Instala dependências do package.json
+npm run start # Inicia a execução do bot
 ```
 
 ## Comandos
