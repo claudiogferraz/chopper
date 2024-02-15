@@ -7,7 +7,7 @@ const commands = [
 	{
 		name: "gerais",
 		description:
-			"Retorna a pontuação de todas as artes enviadas nos portfolios desde o último sábado ao meio-dia.",
+			"Retorna a pontuação de todas as artes enviadas nos canais de artes-gerais desde o último sábado ao meio-dia.",
 	},
 	{
 		name: "ranking",
