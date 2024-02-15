@@ -36,7 +36,7 @@ client.on("interactionCreate", async (interaction) => {
 			break;
 		case "gerais":
 			await interaction.reply("Contando pontos de artes gerais, aguarde...");
-			await interaction.channel?.send(await pontos(interaction.guild, false));
+			await interaction.channel?.send(await gerais(interaction.guild, false));
 			break;
 		case "ranking":
 			await interaction.reply("Contando pontos, aguarde...");
