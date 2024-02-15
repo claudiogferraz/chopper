@@ -125,7 +125,7 @@ const gerais = async (
 					addArts(messages);
 
 					ranking.push({
-						name: channel.name.slice(3).slice(-13),
+						name: channel.name.slice(3).replace("-artes-gerais", ""),
 						score: arts * 10 + gifs * 20 + leaderReactions * 10,
 					});
 				}
