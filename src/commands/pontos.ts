@@ -31,7 +31,10 @@ const pontos = async (
 		let lastSaturday = getLastSaturday().hour(21).toDate().getTime();
 
 		const updateRanking = async (channel: NonThreadGuildBasedChannel) => {
-			if (channel?.parent?.name.toLocaleLowerCase().includes("portfolio")) {
+			if (
+				channel?.parent?.name.toLocaleLowerCase().includes("portfolio") &&
+				!channel.name.includes("artes-gerais")
+			) {
 				let arts = 0;
 				let gifs = 0;
 				let leaderReactions = 0;
