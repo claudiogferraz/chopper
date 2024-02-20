@@ -1,20 +1,10 @@
-import {
-	ChannelType,
-	Collection,
-	Guild,
-	Message,
-	NonThreadGuildBasedChannel,
-} from "discord.js";
-import dayjs from "dayjs";
-import weekday from "dayjs/plugin/weekday";
-import { getLastSaturday } from "../utils/days";
+import { ChannelType, Guild } from "discord.js";
+import { getLastSaturday, getSaturday } from "../utils/days";
 
 interface RankingEntry {
 	name: string;
 	score: number;
 }
-
-dayjs.extend(weekday);
 
 const pontos = async (
 	guild: Guild | null,
@@ -25,115 +15,104 @@ const pontos = async (
 			throw new Error("Guild not found.");
 		}
 
+		let lastSaturday = getLastSaturday().hour(21).toDate().getTime();
+		let thisSaturday = getSaturday().hour(21).toDate().getTime();
+
 		const channels = await guild.channels.fetch();
 		const ranking: Array<RankingEntry> = [];
 
-		let lastSaturday = getLastSaturday().hour(21).toDate().getTime();
+		for (let c = 0; c < channels.size; c++) {
+			const channel = channels.at(c)!;
 
-		const updateRanking = async (channel: NonThreadGuildBasedChannel) => {
 			if (
-				channel?.parent?.name.toLocaleLowerCase().includes("portfolio") &&
+				channel &&
+				channel.parent &&
+				channel.type === ChannelType.GuildText &&
+				channel.parent!.name.toLocaleLowerCase().includes("portfolio") &&
 				!channel.name.includes("artes-gerais")
 			) {
-				let arts = 0;
-				let gifs = 0;
-				let leaderReactions = 0;
+				let arts: number = 0;
+				let gifs: number = 0;
+				let leaderReactions: number = 0;
 
-				if (channel.type === ChannelType.GuildText) {
-					let messages = await channel.messages.fetch({ limit: 100 });
+				let messages = await channel.messages.fetch();
 
-					const addArts = async (
-						messages: Collection<string, Message<true>>
-					) => {
-						for (let i = 0; i < messages.size; i++) {
-							const currentMessage = messages.at(i);
-							let tooMany = true;
+				for (let m = 0; m < messages.size; m++) {
+					const currentMessage = await messages.at(m)!.fetch();
+
+					if (
+						(currentMessage &&
+							Math.floor(currentMessage.createdAt.getTime() / 1000) <
+								Math.floor(lastSaturday / 1000)) ||
+						Math.floor(currentMessage.createdAt.getTime() / 1000) >
+							Math.floor(thisSaturday / 1000)
+					) {
+						m = messages.size;
+						console.log(channel.name.slice(3) + ": pontos contados.");
+					} else if (
+						currentMessage &&
+						Math.floor(currentMessage.createdAt.getTime() / 1000) >
+							Math.floor(lastSaturday / 1000) &&
+						Math.floor(currentMessage.createdAt.getTime() / 1000) <
+							Math.floor(thisSaturday / 1000) &&
+						currentMessage.author.id != process.env.APPLICATION_ID
+					) {
+						const attachmentsSize = currentMessage.attachments.size;
+						let hasImages = false;
+
+						for (let a = 0; a < attachmentsSize; a++) {
+							const attachmentType =
+								currentMessage.attachments.at(a)!.contentType;
 
 							if (
-								Math.floor(currentMessage!.createdAt.getTime() / 1000) <
-								Math.floor(lastSaturday / 1000)
+								attachmentType &&
+								[
+									"image/png",
+									"image/jpeg",
+									"image/jpg",
+									"image/webp",
+									"image/gif",
+								].includes(attachmentType)
 							) {
-								i = messages.size;
-								tooMany = false;
-								console.log(channel.name.slice(3) + ": pontos contados.");
-							} else if (
-								Math.floor(currentMessage!.createdAt.getTime() / 1000) >
-									Math.floor(lastSaturday / 1000) &&
-								currentMessage?.member &&
-								currentMessage.member.id != process.env.APPLICATION_ID
-							) {
-								const attachmentsSize = currentMessage!.attachments.size;
-								let hasImages = false;
+								hasImages = true;
 
-								if (currentMessage && attachmentsSize > 0) {
-									for (let a = 0; a < attachmentsSize; a++) {
-										const attachmentType = messages
-											.at(i)!
-											.attachments.at(a)?.contentType;
+								if (attachmentType == "image/gif") {
+									gifs += 1;
+								} else {
+									arts += 1;
+								}
+							}
+						}
 
-										if (
-											attachmentType == "image/png" ||
-											attachmentType == "image/jpeg" ||
-											attachmentType == "image/jpg" ||
-											attachmentType == "image/webp" ||
-											attachmentType == "image/gif"
-										) {
-											hasImages = true;
+						if (hasImages == true) {
+							const reactions = currentMessage.reactions.cache;
+							const reactionsSize = reactions.size;
 
-											if (attachmentType == "image/gif") {
-												gifs += 1;
-											} else {
-												arts += 1;
-											}
-										}
-									}
+							for (let r = 0; r < reactionsSize; r++) {
+								const users = await reactions.at(r)?.users.fetch()!;
+								const usersSize = users!.size;
 
-									const countedLeaders: Array<string> = [];
-									const reactions = currentMessage!.reactions.cache;
-									const reactionsSize = reactions.size;
+								for (let u = 0; u < usersSize; u++) {
+									const currentUser = await guild.members.fetch(
+										users.at(u)!.id
+									);
 
-									for (let r = 0; r < reactionsSize; r++) {
-										const users = await reactions.at(r)?.users.fetch();
-										const usersSize = users!.size;
-
-										for (let u = 0; u < usersSize; u++) {
-											const currentUserId = users!.at(u)!.id;
-
-											if (
-												!countedLeaders.includes(currentUserId) &&
-												guild.members.cache
-													.get(currentUserId)
-													?.roles.cache.has(process.env.LEADER_ROLE_ID!)
-											) {
-												countedLeaders.push(currentUserId);
-												leaderReactions += 1;
-											}
-										}
+									if (
+										currentUser.roles.cache.has(process.env.LEADER_ROLE_ID!)
+									) {
+										leaderReactions += 1;
+										console.log("Lider reagiu: " + currentUser.displayName);
 									}
 								}
 							}
-							if (i == messages.size - 1 && tooMany == true) {
-								i = 0;
-								messages = await channel.messages.fetch({
-									limit: 50,
-									before: currentMessage?.id,
-								});
-							}
 						}
-					};
-
-					addArts(messages);
-
-					ranking.push({
-						name: channel.name.slice(3),
-						score: arts * 10 + gifs * 20 + leaderReactions * 10,
-					});
+					}
 				}
+				ranking.push({
+					name: channel.name.slice(3),
+					score: arts * 10 + gifs * 20 + leaderReactions * 10,
+				});
 			}
-		};
-
-		for (let i = 0; i < channels.size; i++) {
-			await updateRanking(channels.at(i)!);
 		}
 
 		if (ordenado) {
@@ -142,13 +121,13 @@ const pontos = async (
 
 		let message = "## ⚡ PONTOS DA SEMANA ⚡\n\n";
 
-		ranking.forEach((entry) => {
-			message += `**${entry.name[0].toUpperCase() + entry.name.slice(1)}:** ${
-				entry.score
-			}\n`;
-		});
+		for (let e = 0; e < ranking.length; e++) {
+			const currentEntry = ranking[e];
 
-		message += "\n||<@&912402904143523894>||";
+			message += `**${
+				currentEntry.name[0].toUpperCase() + currentEntry.name.slice(1)
+			}:** ${currentEntry.score}\n`;
+		}
 
 		return message;
 	} catch (error) {

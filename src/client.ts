@@ -1,7 +1,6 @@
 import { Client, GatewayIntentBits, Guild } from "discord.js";
 
 import pontos from "./commands/pontos";
-import gerais from "./commands/gerais";
 import finalizar from "./commands/finalizar";
 import isLeader from "./utils/isLeader";
 
@@ -33,10 +32,6 @@ client.on("interactionCreate", async (interaction) => {
 		case "pontos":
 			await interaction.reply("Contando pontos, aguarde...");
 			await interaction.channel?.send(await pontos(interaction.guild, false));
-			break;
-		case "gerais":
-			await interaction.reply("Contando pontos de artes gerais, aguarde...");
-			await interaction.channel?.send(await gerais(interaction.guild, false));
 			break;
 		case "ranking":
 			await interaction.reply("Contando pontos, aguarde...");
