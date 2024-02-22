@@ -44,6 +44,8 @@ const pontos = async (
 
 				let messages = await channel.messages.fetch();
 
+				console.log("🔵 Contando pontos: " + channel.name.slice(3));
+
 				for (let m = 0; m < messages.size; m++) {
 					const currentMessage = messages.at(m)!;
 
@@ -55,7 +57,7 @@ const pontos = async (
 							Math.floor(thisSaturday / 1000)
 					) {
 						m = messages.size;
-						console.log("🟢 " + channel.name.slice(3) + ": Pontos contados");
+						console.log("🟢 Pontos contados: " + channel.name.slice(3));
 					} else if (
 						currentMessage &&
 						Math.floor(currentMessage.createdAt.getTime() / 1000) >

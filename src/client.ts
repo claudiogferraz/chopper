@@ -34,12 +34,14 @@ client.on("interactionCreate", async (interaction) => {
 			await interaction.channel?.send(
 				await pontos(interaction.guild, interaction.channel, false)
 			);
+			console.log("🟢 Pontos contados!");
 			break;
 		case "ranking":
 			await interaction.reply("Contando pontos, aguarde...");
 			await interaction.channel?.send(
 				await pontos(interaction.guild, interaction.channel, true)
 			);
+			console.log("🟢 Ranking enviado!");
 			break;
 		// case "anterior":
 		// 	await interaction.reply("Contando pontos, aguarde...");
@@ -48,8 +50,9 @@ client.on("interactionCreate", async (interaction) => {
 		// 	);
 		// 	break;
 		case "finalizar":
-			await interaction.reply("Enviando mensagens de semana finalizada.");
 			await finalizar(interaction.guild);
+			await interaction.reply("Semana finalizada!");
+			console.log("🟢 Enviadas mensagens de semana finalizada!");
 			break;
 		default:
 			break;
