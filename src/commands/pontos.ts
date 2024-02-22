@@ -1,4 +1,4 @@
-import { ChannelType, Guild } from "discord.js";
+import { ChannelType, Guild, TextBasedChannel } from "discord.js";
 import { getLastSaturday, getSaturday } from "../utils/days";
 
 interface RankingEntry {
@@ -8,6 +8,7 @@ interface RankingEntry {
 
 const pontos = async (
 	guild: Guild | null,
+	replyChannel: TextBasedChannel,
 	ordenado: boolean
 ): Promise<string> => {
 	try {
@@ -20,6 +21,12 @@ const pontos = async (
 
 		const channels = await guild.channels.fetch();
 		const ranking: Array<RankingEntry> = [];
+
+		const leaders = await guild.roles
+			.fetch(process.env.LEADER_ROLE_ID!)
+			.then((leaderRole) => {
+				return leaderRole?.members;
+			});
 
 		for (let c = 0; c < channels.size; c++) {
 			const channel = channels.at(c)!;
@@ -38,7 +45,7 @@ const pontos = async (
 				let messages = await channel.messages.fetch();
 
 				for (let m = 0; m < messages.size; m++) {
-					const currentMessage = await messages.at(m)!.fetch();
+					const currentMessage = messages.at(m)!;
 
 					if (
 						(currentMessage &&
@@ -48,7 +55,7 @@ const pontos = async (
 							Math.floor(thisSaturday / 1000)
 					) {
 						m = messages.size;
-						console.log(channel.name.slice(3) + ": pontos contados.");
+						console.log("🟢 " + channel.name.slice(3) + ": Pontos contados");
 					} else if (
 						currentMessage &&
 						Math.floor(currentMessage.createdAt.getTime() / 1000) >
@@ -93,15 +100,9 @@ const pontos = async (
 								const usersSize = users!.size;
 
 								for (let u = 0; u < usersSize; u++) {
-									const currentUser = await guild.members.fetch(
-										users.at(u)!.id
-									);
-
-									if (
-										currentUser.roles.cache.has(process.env.LEADER_ROLE_ID!)
-									) {
+									if (leaders!.has(users.at(u)!.id)) {
 										leaderReactions += 1;
-										console.log("Lider reagiu: " + currentUser.displayName);
+										console.log("🔵 Lider reagiu: " + users.at(u)!.displayName);
 									}
 								}
 							}

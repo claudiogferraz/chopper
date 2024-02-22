@@ -18,7 +18,7 @@ const client = new Client({
 
 client.on("ready", () => {
 	if (client.user) {
-		console.log(`Logged in as ${client.user.tag}!`);
+		console.log(`🟢 Logged in as ${client.user.tag}!`);
 	}
 });
 
@@ -31,11 +31,15 @@ client.on("interactionCreate", async (interaction) => {
 	switch (interaction.commandName) {
 		case "pontos":
 			await interaction.reply("Contando pontos, aguarde...");
-			await interaction.channel?.send(await pontos(interaction.guild, false));
+			await interaction.channel?.send(
+				await pontos(interaction.guild, interaction.channel, false)
+			);
 			break;
 		case "ranking":
 			await interaction.reply("Contando pontos, aguarde...");
-			await interaction.channel?.send(await pontos(interaction.guild, true));
+			await interaction.channel?.send(
+				await pontos(interaction.guild, interaction.channel, true)
+			);
 			break;
 		// case "anterior":
 		// 	await interaction.reply("Contando pontos, aguarde...");
