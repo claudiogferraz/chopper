@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.ts",
   "scripts": {
-    "start": "ts-node ./src/main.ts"
+    "start": "bun run ./src/main.ts"
   },
   "author": "Claudio Gofe gofeclaudio@gmail.com",
   "license": "UNLICENSED",
