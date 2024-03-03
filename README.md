@@ -3,11 +3,14 @@
 O bot **Chopper** é uma ferramenta para agilizar aquelas tarefas chatas e repetitivas no gerenciamento do seu servidor da staff de design.
 
 ## Dependências
+
 - git
 - bun
 
 ## Download
+
 Para baixar o repositório execute o seguinte comando no terminal:
+
 ```sh
 git clone git@github.com/claudiogofe/chopper
 ```
@@ -19,8 +22,10 @@ Antes de iniciar o bot, você precisa se certificar que as seguintes variáveis 
 - **CLIENT_SECRET:** O token da aplicação, pode ser encontrado em discord.com/developers.
 - **APPLICATION_ID:** O ID da aplicação, pode ser encontrado em discord.com/developers.
 - **LEADER_ROLE_ID:** O ID do cargo de liderança no servidor da área.
+- **TZ:** Um identificador de fuso horário válido [(mais informações)](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#list).
 
 Exemplo de **.env** com valores indefinidos:
+
 ```sh
 CLIENT_SECRET=
 APPLICATION_ID=
