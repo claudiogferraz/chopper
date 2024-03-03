@@ -19,7 +19,7 @@ const getSaturday = (weekBefore: boolean) => {
 	if (weekday < 6) {
 		difference = 6 - weekday;
 	}
-	return today.add(difference, "d").weekday(6).hour(21).minute(0);
+	return today.add(difference, "d").weekday(6).hour(21).minute(0).second(0);
 };
 
 const getLastSaturday = (weekBefore: boolean) => {
@@ -32,7 +32,7 @@ const getLastSaturday = (weekBefore: boolean) => {
 	if (weekday < 6) {
 		difference = 6 - weekday;
 	}
-	return today.add(difference, "day").weekday(6).hour(21).minute(0);
+	return today.add(difference, "day").weekday(6).hour(21).minute(0).second(0);
 };
 
 export { getToday, getSaturday, getLastSaturday };

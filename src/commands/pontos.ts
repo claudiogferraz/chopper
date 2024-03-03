@@ -61,13 +61,13 @@ const pontos = async (
 
 					if (
 						currentMessage &&
-						(Math.floor(createdAt.toDate().getTime() / 1000) <
+						(Math.floor(createdAt.valueOf() / 1000) <
 							Math.floor(lastSaturday / 1000) ||
-							Math.floor(createdAt.toDate().getTime() / 1000) >
+							Math.floor(createdAt.valueOf() / 1000) >
 								Math.floor(thisSaturday / 1000))
 					) {
 						if (
-							Math.floor(createdAt.toDate().getTime() / 1000) <
+							Math.floor(createdAt.valueOf() / 1000) <
 							Math.floor(lastSaturday / 1000)
 						) {
 							m = messages.size;
@@ -76,9 +76,9 @@ const pontos = async (
 						}
 					} else if (
 						currentMessage &&
-						Math.floor(currentMessage.createdAt.getTime() / 1000) >
+						Math.floor(createdAt.valueOf() / 1000) >
 							Math.floor(lastSaturday / 1000) &&
-						Math.floor(currentMessage.createdAt.getTime() / 1000) <
+						Math.floor(createdAt.valueOf() / 1000) <
 							Math.floor(thisSaturday / 1000) &&
 						currentMessage.author.id != process.env.APPLICATION_ID
 					) {
@@ -88,6 +88,7 @@ const pontos = async (
 						for (let a = 0; a < attachmentsSize; a++) {
 							const attachmentType =
 								currentMessage.attachments.at(a)!.contentType;
+							console.log("Attachment type = " + attachmentType);
 
 							if (
 								attachmentType &&
@@ -100,7 +101,6 @@ const pontos = async (
 								].includes(attachmentType)
 							) {
 								hasImages = true;
-
 								if (attachmentType == "image/gif") {
 									gifs += 1;
 								} else {
