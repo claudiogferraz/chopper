@@ -1,11 +1,13 @@
 import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import utc from "dayjs/plugin/utc";
+import "dayjs/locale/pt-br";
 
 dayjs.extend(weekday);
 dayjs.extend(utc);
+dayjs.locale("pt-br");
 
-const getToday = () => dayjs();
+const getToday = () => dayjs().subtract(3, "hours");
 
 const getSaturday = () => {
 	let today = getToday().utcOffset(-3);

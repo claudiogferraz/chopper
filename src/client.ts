@@ -31,16 +31,12 @@ client.on("interactionCreate", async (interaction) => {
 	switch (interaction.commandName) {
 		case "pontos":
 			await interaction.reply("Contando pontos, aguarde...");
-			await interaction.channel?.send(
-				await pontos(interaction.guild, interaction.channel, false)
-			);
+			await interaction.channel?.send(await pontos(interaction.guild, false));
 			console.log("🟢 Pontos contados!");
 			break;
 		case "ranking":
 			await interaction.reply("Contando pontos, aguarde...");
-			await interaction.channel?.send(
-				await pontos(interaction.guild, interaction.channel, true)
-			);
+			await interaction.channel?.send(await pontos(interaction.guild, true));
 			console.log("🟢 Ranking enviado!");
 			break;
 		// case "anterior":

@@ -8,7 +8,6 @@ interface RankingEntry {
 
 const pontos = async (
 	guild: Guild | null,
-	replyChannel: TextBasedChannel,
 	ordenado: boolean
 ): Promise<string> => {
 	try {
@@ -41,9 +40,9 @@ const pontos = async (
 				let arts: number = 0;
 				let gifs: number = 0;
 				let leaderReactions: number = 0;
-				
-				let limit = 100
-				let messages = await channel.messages.fetch({limit});
+
+				let limit = 100;
+				let messages = await channel.messages.fetch({ limit });
 				let foundEnd = false;
 
 				console.log("🔵 Contando pontos: " + channel.name.slice(3));
@@ -112,15 +111,18 @@ const pontos = async (
 								}
 							}
 						}
-						
+
 						if (m == messages.size - 1 && foundEnd == false) {
 							m = -1;
-							
+
 							if (limit != 25) {
-								limit = limit/2
+								limit = limit / 2;
 							}
 
-							messages = await channel.messages.fetch({limit, before: currentMessage.id});
+							messages = await channel.messages.fetch({
+								limit,
+								before: currentMessage.id,
+							});
 						}
 					}
 				}
