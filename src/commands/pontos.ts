@@ -1,5 +1,6 @@
 import { ChannelType, Guild, TextBasedChannel } from "discord.js";
 import { getLastSaturday, getSaturday } from "../utils/days";
+import dayjs from "dayjs";
 
 interface RankingEntry {
 	name: string;
@@ -8,15 +9,16 @@ interface RankingEntry {
 
 const pontos = async (
 	guild: Guild | null,
-	ordenado: boolean
+	ordenado: boolean,
+	anterior: boolean
 ): Promise<string> => {
 	try {
 		if (!guild) {
 			throw new Error("Guild not found.");
 		}
 
-		let lastSaturday = getLastSaturday().hour(21).toDate().getTime();
-		let thisSaturday = getSaturday().hour(21).toDate().getTime();
+		let lastSaturday = getLastSaturday(anterior).subtract(3, "hours").valueOf();
+		let thisSaturday = getSaturday(anterior).subtract(3, "hours").valueOf();
 
 		const channels = await guild.channels.fetch();
 		const ranking: Array<RankingEntry> = [];
@@ -49,17 +51,29 @@ const pontos = async (
 
 				for (let m = 0; m < messages.size; m++) {
 					const currentMessage = messages.at(m)!;
+					const createdAt = dayjs(currentMessage.createdAt).subtract(
+						3,
+						"hours"
+					);
+					console.log("Este sábado: " + dayjs(thisSaturday).toISOString());
+					console.log("Último sábado: " + dayjs(lastSaturday).toISOString());
+					console.log("Mensagem enviada: " + createdAt.toISOString());
 
 					if (
-						(currentMessage &&
-							Math.floor(currentMessage.createdAt.getTime() / 1000) <
-								Math.floor(lastSaturday / 1000)) ||
-						Math.floor(currentMessage.createdAt.getTime() / 1000) >
-							Math.floor(thisSaturday / 1000)
+						currentMessage &&
+						(Math.floor(createdAt.toDate().getTime() / 1000) <
+							Math.floor(lastSaturday / 1000) ||
+							Math.floor(createdAt.toDate().getTime() / 1000) >
+								Math.floor(thisSaturday / 1000))
 					) {
-						m = messages.size;
-						foundEnd = true;
-						console.log("🟢 Pontos contados: " + channel.name.slice(3));
+						if (
+							Math.floor(createdAt.toDate().getTime() / 1000) <
+							Math.floor(lastSaturday / 1000)
+						) {
+							m = messages.size;
+							foundEnd = true;
+							console.log("🟢 Pontos contados: " + channel.name.slice(3));
+						}
 					} else if (
 						currentMessage &&
 						Math.floor(currentMessage.createdAt.getTime() / 1000) >

@@ -9,24 +9,30 @@ dayjs.locale("pt-br");
 
 const getToday = () => dayjs().subtract(3, "hours");
 
-const getSaturday = () => {
-	let today = getToday().utcOffset(-3);
+const getSaturday = (weekBefore: boolean) => {
+	let today = getToday();
+	if (weekBefore) {
+		today = today.subtract(1, "week");
+	}
 	const weekday: number = today.weekday();
 	let difference: number = 0;
 	if (weekday < 6) {
 		difference = 6 - weekday;
 	}
-	return today.add(difference, "d").weekday(6);
+	return today.add(difference, "d").weekday(6).hour(21).minute(0);
 };
 
-const getLastSaturday = () => {
-	let today = getToday().utcOffset(-3).subtract(1, "week");
+const getLastSaturday = (weekBefore: boolean) => {
+	let today = getToday().subtract(1, "week");
+	if (weekBefore) {
+		today = today.subtract(1, "week");
+	}
 	const weekday: number = today.weekday();
 	let difference: number = 0;
 	if (weekday < 6) {
 		difference = 6 - weekday;
 	}
-	return today.add(difference, "day").weekday(6);
+	return today.add(difference, "day").weekday(6).hour(21).minute(0);
 };
 
 export { getToday, getSaturday, getLastSaturday };
