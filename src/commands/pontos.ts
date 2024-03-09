@@ -142,7 +142,7 @@ const pontos = async (
 				}
 				ranking.push({
 					name: channel.name.slice(3),
-					score: arts * 10 + gifs * 20 + leaderReactions * 10,
+					score: arts * 10 + gifs * 15 + leaderReactions * 10,
 				});
 			}
 		}
