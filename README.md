@@ -28,8 +28,10 @@ Exemplo de **.env** com valores indefinidos:
 
 ```sh
 CLIENT_SECRET=
+GUILD_ID=
 APPLICATION_ID=
 LEADER_ROLE_ID=
+TZ=
 ```
 
 ## Inicialização

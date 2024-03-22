@@ -1,7 +1,8 @@
-import { REST, Routes } from "discord.js";
+import { Guild, REST, Routes } from "discord.js";
 import client from "./client";
 import commands from "./commands";
 import "dotenv/config";
+import finalizer from "./finalizer";
 
 // check environment variables
 let errorMessage = "Faltaram as variáveis de ambiente:\n";
@@ -31,3 +32,5 @@ try {
 }
 
 client.login(process.env.CLIENT_SECRET!);
+
+client.guilds.fetch(process.env.GUILD_ID!).then((guild) => finalizer(guild));

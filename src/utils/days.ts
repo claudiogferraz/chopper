@@ -7,7 +7,7 @@ dayjs.extend(weekday);
 dayjs.extend(utc);
 dayjs.locale("pt-br");
 
-const getToday = () => dayjs().subtract(3, "hours");
+const getToday = () => dayjs();
 
 const getSaturday = (weekBefore: boolean) => {
 	let today = getToday();
