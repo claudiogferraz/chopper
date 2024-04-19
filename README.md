@@ -2,7 +2,7 @@
 
 O bot **Chopper** é uma ferramenta para agilizar aquelas tarefas chatas e repetitivas no gerenciamento do seu servidor da staff de design.
 
-## Dependências
+## Requisitos
 
 - git
 - bun
@@ -36,10 +36,10 @@ TZ=
 
 ## Inicialização
 
-Após baixar o repositório, para iniciar o bot é necessário baixar também os pacotes necessários e rodar comando de inicialização, como no exemplo:
+Após baixar o repositório, para iniciar o bot é necessário baixar também as dependências necessárias e rodar comando de inicialização, como no exemplo:
 
 ```sh
-bun install # Instala dependências do package.json
+bun install # Instala dependências no package.json
 bun start # Inicia a execução do bot
 ```
 
