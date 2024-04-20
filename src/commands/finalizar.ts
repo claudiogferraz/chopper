@@ -17,6 +17,17 @@ const finalizar = async (guild: Guild | null) => {
 				channel?.send("https://imgur.com/t17R6UI.png");
 			}
 		}
+
+		const extraChannelsIds = process.env.EXTRA_WEEKLY_CHANNELS?.split(",");
+
+		if (extraChannelsIds) {
+			for (let i = 0; i < extraChannelsIds.length; i++) {
+				const channel = await guild.channels.fetch(extraChannelsIds[i]);
+				if (channel!.type == ChannelType.GuildText) {
+					channel?.send("https://imgur.com/t17R6UI.png");
+				}
+			}
+		}
 	} catch (error) {
 		console.error(error);
 		return "Não consegui enviar as mensagens nos portfolios. Caso o erro persista contacte o desenvolvedor do bot <@276129537572470784>";
