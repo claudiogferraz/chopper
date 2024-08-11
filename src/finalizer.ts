@@ -7,9 +7,9 @@ export default async function weekFinalizer(guild: Guild) {
 	console.log(getToday());
 
 	const closing = {
-		day: 6, // No DayJS, sábado é o sexto dia da semana
-		hour: 21, // A semana finaliza às 21 horas
-		minute: 0, // A semana finaliza aos 0 minutos
+		day: 5, // No DayJS, sexta é o sexto dia da semana
+		hour: 23, // A semana finaliza às 23 horas
+		minute: 59, // A semana finaliza aos 59 minutos
 	};
 
 	setInterval(async () => {
